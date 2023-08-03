@@ -4,8 +4,8 @@
  */
 
 import { test, expect } from '@playwright/test';
-import { ProductMasterPage } from './page-objects/product-master.po';
-import { ProductDetailPage } from './page-objects/product-detail.po';
+import { ProductMasterPage } from '../page-objects/product-master.po';
+import { ProductDetailPage } from '../page-objects/product-detail.po';
 
 test.describe('Product master page', () => {
   let masterPage: ProductMasterPage;

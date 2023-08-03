@@ -5,7 +5,7 @@
 
 import { PlaywrightTestConfig, devices } from '@playwright/test';
 
-const config: PlaywrightTestConfig = {
+export const baseConfig: PlaywrightTestConfig = {
   timeout: 45000,
   use: {
     headless: true,
@@ -41,6 +41,4 @@ const config: PlaywrightTestConfig = {
     },
   ],
 };
-export default config;
-
 export const baseUrl = 'http://localhost:4200';

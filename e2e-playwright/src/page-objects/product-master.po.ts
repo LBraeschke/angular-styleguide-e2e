@@ -4,13 +4,17 @@
  */
 
 import { Page, Response } from '@playwright/test';
-import { baseUrl } from '../../playwright.config';
+import { baseUrl } from '../../playwright.config.base';
 
 export class ProductMasterPage {
   constructor(private page: Page) {}
 
   navigateTo(): Promise<Response> {
     return this.page.goto(baseUrl);
+  }
+
+  reload(): Promise<Response> {
+    return this.page.reload();
   }
 
   getTitle(): Promise<string | null> {
