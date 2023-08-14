@@ -11,12 +11,18 @@
 
 <div class="container">
   <div class="row">
-    <app-product
-      class="col-md-4 col-sm-6 col-12"
-      *ngFor="let product of products$ | async"
-      [product]="product"
-      (productImageClicked)="loadProductDetails(product.id)"
-    >
-    </app-product>
+    <ng-container *ngIf="products$ | async as products; else failed">
+      <app-product
+        class="col-md-4 col-sm-6 col-12"
+        *ngFor="let product of products"
+        [product]="product"
+        (productImageClicked)="loadProductDetails(product.id)"
+      >
+      </app-product>
+    </ng-container>
   </div>
 </div>
+
+<ng-template #failed>
+  <div class="error-message" data-test="products-error">No products found!</div>
+</ng-template>

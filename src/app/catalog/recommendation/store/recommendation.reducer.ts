@@ -5,7 +5,7 @@
 
 import { createReducer, on } from '@ngrx/store';
 import { Recommendation } from '@models/recommendation';
-import { loadRecommendationsSuccess } from './recommendation.actions';
+import { loadRecommendationsFailed, loadRecommendationsSuccess } from './recommendation.actions';
 
 export const recommendationFeatureKey = 'recommendation';
 
@@ -19,5 +19,6 @@ export const initialState: RecommendationState = {
 
 export const reducer = createReducer(
   initialState,
-  on(loadRecommendationsSuccess, (state, { recommendations }) => ({ ...state, recommendations }))
+  on(loadRecommendationsSuccess, (state, { recommendations }) => ({ ...state, recommendations })),
+  on(loadRecommendationsFailed, (state) => ({ ...state, recommendations: null }))
 );

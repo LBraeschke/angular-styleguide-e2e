@@ -13,6 +13,8 @@ export const loadProductsSuccess = createAction(
   props<{ products: Product[] }>()
 );
 
+export const loadProductsFailed = createAction('[Product] Load Products Failed');
+
 export const loadProductDetails = createAction(
   '[Product] Load Product Details',
   props<{ productId: number }>()
@@ -22,3 +24,5 @@ export const loadProductDetailsSuccess = createAction(
   '[Product] Load ProductDetails Success',
   props<{ product: Product }>()
 );
+
+export const orderProducts = createAction('[Product] Order Product', props<{ product: Product }>());

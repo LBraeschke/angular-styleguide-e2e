@@ -5,11 +5,15 @@
 
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY } from 'rxjs';
+import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 
 import { RecommendationService } from '@app/catalog/recommendation/services/recommendation.service';
-import { loadRecommendations, loadRecommendationsSuccess } from './recommendation.actions';
+import {
+  loadRecommendations,
+  loadRecommendationsFailed,
+  loadRecommendationsSuccess,
+} from './recommendation.actions';
 
 @Injectable()
 export class RecommendationEffects {
@@ -21,7 +25,7 @@ export class RecommendationEffects {
       switchMap(() =>
         this.service.loadRecommendations().pipe(
           map((recommendations) => loadRecommendationsSuccess({ recommendations })),
-          catchError(() => EMPTY)
+          catchError(() => of(loadRecommendationsFailed()))
         )
       )
     )
