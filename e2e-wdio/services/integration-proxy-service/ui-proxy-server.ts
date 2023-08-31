@@ -37,7 +37,7 @@ export class UiIntegrationTestProxyService implements Services.ServiceInstance, 
     this.startProxy(frontendPort, backendPort);
 
     await this.startBackendMock(backendPort);
-    // config.baseUrl = `${'http://localhost'}:${frontendPort}/`;
+    config.baseUrl = `${'http://localhost'}:${frontendPort}/`;
     await setValue('backendPort', backendPort);
   }
 
@@ -75,9 +75,11 @@ export class UiIntegrationTestProxyService implements Services.ServiceInstance, 
     });
 
     this.proxyServer = http.createServer((req, res) => {
-      console.log('proxy ', req.url);
-      if (req.url?.includes('/assets')) {
-        // Rediret the rquest to the mock backend
+      if (
+        req.url?.includes('/assets/products.json') ||
+        req.url?.includes('/assets/recommendations.json')
+      ) {
+        // Redirect the request to the mock backend
         proxy.web(req, res, { target: `http://localhost:${mockBackendPort}` });
       } else {
         proxy.web(req, res, { target: 'http://localhost:4200' });

@@ -9,7 +9,7 @@ export const localConfig = merge(
   {
     specs: ['./src/integration/**/*.e2e.ts'],
     services: [
-      [ChromeUpdateService, {}],
+      [ChromeUpdateService],
       'chromedriver',
       'shared-store',
       [UiIntegrationTestProxyService, {}],
