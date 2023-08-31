@@ -13,7 +13,7 @@
         <p>{{ product.price }}</p>
         <h3>Ingredients</h3>
         <p>{{ product.description }}</p>
-        <button class="confirmation-button" (click)="showConfirmation()">Buy Online</button>
+        <button class="confirmation-button" (click)="showConfirmation(product)">Buy Online</button>
       </div>
     </div>
     <button class="back-button" (click)="backToProductOverview()">Back to all products</button>

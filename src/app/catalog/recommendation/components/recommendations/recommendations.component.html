@@ -7,12 +7,18 @@
   <h2>More ice cream</h2>
   <div class="container">
     <div class="row">
-      <app-recommendation
-        class="col-md-4 col-sm-6 col-12"
-        *ngFor="let recommendation of recommendations$ | async"
-        [recommendation]="recommendation"
-      >
-      </app-recommendation>
+      <ng-container *ngIf="recommendations$ | async as recommendations; else failed">
+        <app-recommendation
+          class="col-md-4 col-sm-6 col-12"
+          *ngFor="let recommendation of recommendations"
+          [recommendation]="recommendation"
+        >
+        </app-recommendation>
+      </ng-container>
     </div>
   </div>
 </div>
+
+<ng-template #failed>
+  <div class="error-message" data-test="recommendations-error">No recommendations found!</div>
+</ng-template>

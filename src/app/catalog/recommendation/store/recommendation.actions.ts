@@ -12,3 +12,7 @@ export const loadRecommendationsSuccess = createAction(
   '[Recommendation] Load Recommendations Success',
   props<{ recommendations: Recommendation[] }>()
 );
+
+export const loadRecommendationsFailed = createAction(
+  '[Recommendation] Load Recommendations Failed'
+);

@@ -6,7 +6,11 @@
 import { createReducer, on } from '@ngrx/store';
 import { Product } from '@models/product';
 import { Nullable } from '@app/shared/global.types';
-import { loadProductDetailsSuccess, loadProductsSuccess } from './product.actions';
+import {
+  loadProductDetailsSuccess,
+  loadProductsFailed,
+  loadProductsSuccess,
+} from './product.actions';
 
 export const productFeatureKey = 'product';
 
@@ -23,6 +27,7 @@ export const initialState: ProductState = {
 export const reducer = createReducer(
   initialState,
   on(loadProductsSuccess, (state, { products }) => ({ ...state, products })),
+  on(loadProductsFailed, (state) => ({ ...state, products: null })),
   on(loadProductDetailsSuccess, (state, { product }) => ({
     ...state,
     currentProductDetails: product,

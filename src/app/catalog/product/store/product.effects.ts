@@ -12,7 +12,9 @@ import {
   loadProductDetails,
   loadProductDetailsSuccess,
   loadProducts,
+  loadProductsFailed,
   loadProductsSuccess,
+  orderProducts,
 } from './product.actions';
 import { ProductService } from '@app/catalog/product/services/product.service';
 import { navigate } from '@app/shared/navigation/navigation.actions';
@@ -27,7 +29,7 @@ export class ProductEffects {
       switchMap(() =>
         this.service.loadProducts().pipe(
           map((products) => loadProductsSuccess({ products })),
-          catchError(() => EMPTY)
+          catchError(() => of(loadProductsFailed()))
         )
       )
     )
@@ -44,6 +46,15 @@ export class ProductEffects {
           catchError(() => EMPTY)
         )
       )
+    )
+  );
+
+  orderProduct$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(orderProducts),
+      switchMap(({ product }) => this.service.orderProduct(product.id)),
+      map(() => navigate({ url: '/order' })),
+      catchError(() => EMPTY)
     )
   );
 }
